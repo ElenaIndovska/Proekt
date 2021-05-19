@@ -10,7 +10,7 @@ using Proekt.Data;
 namespace Proekt.Migrations
 {
     [DbContext(typeof(ProektContext))]
-    [Migration("20210512102125_Initial")]
+    [Migration("20210518191353_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,7 +18,7 @@ namespace Proekt.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.4")
+                .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Proekt.Models.Course", b =>

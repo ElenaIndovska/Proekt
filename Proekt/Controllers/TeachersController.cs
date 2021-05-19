@@ -182,5 +182,15 @@ namespace Proekt.Controllers
         {
             return _context.Teacher.Any(e => e.Id == id);
         }
+
+        public async Task<IActionResult> ForCourses(int id)
+        {
+            var courses = _context.Course.Where(c => c.FirstTeacherID == id || c.SecondTeacherID == id);
+            courses = courses.Include(c => c.FirstTeacher).Include(c => c.SecondTeacher);
+
+            ViewData["TeacherId"] = id;
+
+            return View(courses);
+        }
     }
 }

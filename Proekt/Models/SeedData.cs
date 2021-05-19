@@ -78,11 +78,11 @@ namespace Proekt.Models
                 context.SaveChanges();
 
                 context.Enrollment.AddRange(
-                    new Enrollment { CourseId = 1, StudentId = 1, Semester = "8", ExamPoints = 0 },
-                    new Enrollment { CourseId = 2, StudentId = 1, Semester = "6", ExamPoints = 60 },
-                    new Enrollment { CourseId = 1, StudentId = 3, Semester = "8", ExamPoints = 100 },
-                    new Enrollment { CourseId = 2, StudentId = 3, Semester = "4", ExamPoints = 80 },
-                    new Enrollment { CourseId = 2, StudentId = 2, Semester = "4", ExamPoints = 100 }
+                    new Enrollment { CourseId = 1, StudentId = 1, Year = 2017, Semester = "8", ExamPoints = 0 },
+                    new Enrollment { CourseId = 2, StudentId = 1, Year = 2017, Semester = "6", ExamPoints = 60 },
+                    new Enrollment { CourseId = 1, StudentId = 3, Year = 2017, Semester = "8", ExamPoints = 100 },
+                    new Enrollment { CourseId = 2, StudentId = 3, Year = 2017, Semester = "4", ExamPoints = 80 },
+                    new Enrollment { CourseId = 2, StudentId = 2, Year = 2019, Semester = "4", ExamPoints = 100 }
                 );
 
                 context.SaveChanges();

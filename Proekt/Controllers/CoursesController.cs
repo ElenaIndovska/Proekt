@@ -193,5 +193,6 @@ namespace Proekt.Controllers
         {
             return _context.Course.Any(e => e.Id == id);
         }
+
     }
 }
