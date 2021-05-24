@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Proekt.Models.Student>
+
+@{
+    ViewData["Title"] = "Students";
+}
+
+<h1>Studenti na predmetot @ViewData["CourseTitle"]</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentId)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EntollmentDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AcquiredCredits)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentSemester)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EducationLevel)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudentId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EntollmentDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AcquiredCredits)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CurrentSemester)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EducationLevel)
+                </td>
+                
+            </tr>
+        }
+    </tbody>
+</table>

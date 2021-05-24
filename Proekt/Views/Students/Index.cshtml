@@ -47,6 +47,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Students[0].EducationLevel)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Students[0].Courses)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -73,6 +76,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.EducationLevel)
+            </td>
+            <td>
+                <a asp-action="Courses" asp-route-id="@item.Id">Show Courses</a>
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

@@ -194,5 +194,23 @@ namespace Proekt.Controllers
             return _context.Course.Any(e => e.Id == id);
         }
 
+        public async Task<IActionResult> Students(int? id)
+        {
+            IQueryable<Student> students = _context.Student.AsQueryable();
+            IQueryable<Enrollment> enrollments = _context.Enrollment.AsQueryable();
+
+            enrollments = enrollments.Where(e => e.CourseId == id);
+
+            IEnumerable<int> enrollStudentId = enrollments.Select(e => e.StudentId).Distinct();
+
+            students = students.Where(s => enrollStudentId.Contains(s.Id));
+            students = students.Include(s => s.Courses).ThenInclude(s => s.Course);
+
+            ViewData["CourseTitle"] = _context.Course.Where(c => c.Id == id).Select(c => c.Title).FirstOrDefault();
+            ViewData["CourseId"] = id;
+
+            return View(students);
+        }
+
     }
 }

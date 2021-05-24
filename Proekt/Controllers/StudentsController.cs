@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -172,6 +174,24 @@ namespace Proekt.Controllers
         private bool StudentExists(int id)
         {
             return _context.Student.Any(e => e.Id == id);
+        }
+
+        public async Task<IActionResult> Courses(int? id)
+        {
+            IQueryable<Course> courses = _context.Course.Include(c => c.FirstTeacher).Include(c => c.SecondTeacher).AsQueryable();
+            IQueryable<Enrollment> enrollments = _context.Enrollment.AsQueryable();
+
+            enrollments = enrollments.Where(e => e.StudentId == id);
+
+            IEnumerable<int> enrollCourseId = enrollments.Select(e => e.CourseId).Distinct();
+
+            courses = courses.Where(c => enrollCourseId.Contains(c.Id));
+            courses = courses.Include(c => c.Students).ThenInclude(c => c.Student);
+
+            ViewData["StudentFullName"] = _context.Student.Where(t => t.Id == id).Select(t => t.FullName).FirstOrDefault();
+            ViewData["StudentId"] = id;
+            return View(courses);
+
         }
     }
 }

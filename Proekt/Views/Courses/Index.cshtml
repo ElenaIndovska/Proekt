@@ -84,10 +84,7 @@
                 }
             </td>
             <td>
-                @foreach (var student in item.Students)
-                {
-                    <a asp-controller="Students" asp-action="Details" asp-route-id="@student.StudentId">@student.Student.FullName</a> <br />
-                }
+                <a asp-action="Students" asp-route-id="@item.Id">Show Students</a>
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
