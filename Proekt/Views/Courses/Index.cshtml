@@ -6,9 +6,14 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+
+}
+
 
 <form asp-controller="Courses" asp-action="Index" method="get">
     <p>
@@ -54,44 +59,47 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Courses) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Credits)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Semester)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Programme)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EducationLevel)
-            </td>
-            <td>
-                @if (item.FirstTeacherID != null)
-                {
-                    <a asp-controller="Teachers" asp-action="Details" asp-route-id="@item.FirstTeacherID"> @Html.DisplayFor(modelItem => item.FirstTeacher.FullName)</a>
-                }
-            </td>
-            <td>
-                @if (item.SecondTeacherID != null)
-                {
-                    <a asp-controller="Teachers" asp-action="Details" asp-route-id="@item.SecondTeacherID"> @Html.DisplayFor(modelItem => item.SecondTeacher.FullName)</a>
-                }
-            </td>
-            <td>
-                <a asp-action="Students" asp-route-id="@item.Id">Show Students</a>
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Courses)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Credits)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Semester)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Programme)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EducationLevel)
+                </td>
+                <td>
+                    @if (item.FirstTeacherID != null)
+                    {
+                        <a asp-controller="Teachers" asp-action="Details" asp-route-id="@item.FirstTeacherID"> @Html.DisplayFor(modelItem => item.FirstTeacher.FullName)</a>
+                    }
+                </td>
+                <td>
+                    @if (item.SecondTeacherID != null)
+                    {
+                        <a asp-controller="Teachers" asp-action="Details" asp-route-id="@item.SecondTeacherID"> @Html.DisplayFor(modelItem => item.SecondTeacher.FullName)</a>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Students" asp-route-id="@item.Id">Show Students</a>
+                </td>
+                <td>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {<a asp-action="Edit" asp-route-id="@item.Id">Edit</a>} |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    { <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>}
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

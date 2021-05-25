@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Proekt.Areas.Identity.Data;
 using Proekt.Models;
 
 namespace Proekt.Data
 {
-    public class ProektContext : DbContext
+    public class ProektContext : IdentityDbContext<ProektUser>
     {
         public ProektContext (DbContextOptions<ProektContext> options)
             : base(options)
@@ -23,6 +25,7 @@ namespace Proekt.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
             builder.Entity<Enrollment>()
                 .HasOne<Student>(s => s.Student)
                 .WithMany(s => s.Courses)
